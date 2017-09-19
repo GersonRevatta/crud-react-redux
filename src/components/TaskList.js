@@ -2,10 +2,10 @@ import React  from 'react';
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
 import store from '../store';
-import { addToCart } from '../actionCreators';
+import { destroyTask } from '../actionCreators';
 
 
-const TaskList = ({products, addToCart}) => {
+const TaskList = ({products, destroyTask}) => {
     return(
       <div>
         <Button>Add</Button>  
@@ -21,34 +21,28 @@ const TaskList = ({products, addToCart}) => {
                   <h3>{product.descripcion}</h3>
                 </th>
                 <th>
-                  <Button>Eliminar</Button>  
+                  <Button  bsStyle="danger" onClick={() => destroyTask(product)}>Eliminar<Glyphicon glyph="trash" /></Button>
                 </th>
               </tr>
             )}  
             
           </table>
         </center>
-       
       </div>
-
 );  
 };
-
-
 const mapStateToProps = state => {
   return {
     products: state.products
   };
 };
-
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart(product) {
-      dispatch(addToCart(product));
+    destroyTask(product) {
+      dispatch(destroyTask(product));
     }
   };
 } 
-
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
 
 //export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

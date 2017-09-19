@@ -16,15 +16,20 @@ const reducer = (state=initialState, action) => {
   } else if (action.type === "ADD_TO_CART") {
     return {
       ...state,
-      cart: state.cart.concat(action.product)
+      products: state.products.filter(product => product.id !== action.product.id)
+// cart: state.cart.concat(action.product)
     }
   } else if (action.type === "REMOVE_FROM_CART") {
     return {
       ...state,
       cart: state.cart.filter(product => product.id !== action.product.id)
     }
+  } else if (action.type === "DESTROY_TASK") {
+    return {
+      ...state,
+      products: state.products.filter(product => product.id !== action.product.id)
+    }
   }
-
   return state;
 };
 
