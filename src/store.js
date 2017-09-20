@@ -27,7 +27,7 @@ const reducer = (state=initialState, action) => {
   } else if (action.type === "DESTROY_TASK") {
     return {
       ...state,
-      products: state.products.filter(product => product.id !== action.product.id)
+      products: state.products.filter(product => product.id !== action.product)
     }
   }
   return state;

@@ -21,7 +21,7 @@ const TaskList = ({products, destroyTask}) => {
                   <h3>{product.descripcion}</h3>
                 </th>
                 <th>
-                  <Button  bsStyle="danger" onClick={() => destroyTask(product)}>Eliminar<Glyphicon glyph="trash" /></Button>
+                  <Button  bsStyle="danger" onClick={() => destroyTask(product.id)}>Eliminar</Button>
                 </th>
               </tr>
             )}  
@@ -38,12 +38,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    destroyTask(product) {
-      dispatch(destroyTask(product));
+    destroyTask(products) {
+      dispatch(destroyTask(products));
     }
   };
 } 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
-
-//export default connect(mapStateToProps, mapDispatchToProps)(ProductList);
-
