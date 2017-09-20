@@ -29,8 +29,26 @@ const reducer = (state=initialState, action) => {
       ...state,
       products: state.products.filter(product => product.id !== action.product)
     }
+  } else if (action.type === "ADD_TASK"){
+    return {
+      ...state,
+      products: state.products.concat(action.response)
+    }
   }
   return state;
 };
 
 export default createStore(reducer, applyMiddleware(thunk));
+
+
+/*
+export const editTodo = (todo) => {
+  return fetch(`${baseUrl}/${todo.id}`, {
+    method: 'PUT',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(todo)
+  })
+    .then(res => res.json())
+} */

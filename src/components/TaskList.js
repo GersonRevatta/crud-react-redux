@@ -2,13 +2,23 @@ import React  from 'react';
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
 import store from '../store';
-import { destroyTask } from '../actionCreators';
+import { destroyTask , addTask } from '../actionCreators';
 
 
-const TaskList = ({products, destroyTask}) => {
+const TaskList = ({products, destroyTask, addTask }) => {
     return(
       <div>
-        <Button>Add</Button>  
+      <a 
+      className='add-todo' 
+      href="#" 
+      onClick={(e) =>{ 
+        e.preventDefault(); 
+        var todo = {'titulo': 'new Todo', descripcion: "Something", prioridad: 1, activo: false} 
+        addTask(todo) 
+      }} 
+    >
+        hola
+    </a>
         <br/>
         <center>
           <table>
@@ -40,7 +50,11 @@ const mapDispatchToProps = dispatch => {
   return {
     destroyTask(products) {
       dispatch(destroyTask(products));
+    },
+    addTask(todo){
+      dispatch(addTask(todo));
     }
+
   };
 } 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
