@@ -19,26 +19,34 @@ const destroyTask = (product) => {
   return { type: "DESTROY_TASK",  product };
 };
 
-//corregir
 const addTask = (todo) => {
   return dispatch=>{
     return axios.post(`${baseUrl}`,todo)
     .then(response=>{
-      console.log(response);
-      console.log(response.data)
       dispatch({type:"ADD_TASK",response: response.data});
     }); 
   }
- /* console.log(todo);
-  console.log(todo.titulo );
-  return { type: "ADD_TASK", response: todo };
-*/
 }
-/*
-const editTask = () => {
 
-}*/
+
+const editTask = (todo) => {
+  return dispatch=>{
+    //return axios.get(`${baseUrl}/${todo}`)
+    return axios({
+      method:'put',
+      url:`${baseUrl}/${todo}`,
+      data: { "titulo":"hola worl :D","descripcion":"hi world","prioridad":3,"activo":true} 
+    })
+    .then(response=>{
+      console.log(todo)
+      console.log(response);
+      console.log(response.data);
+      dispatch({type:"EDIT_TASK",response: response.data});
+    }); 
+  }
+}
+
 // { "titulo":"hola worl :D","descripcion":"hi world","prioridad":3,"activo":true} 
 
-export { loadProducts , addToCart , destroyTask , addTask };
+export { loadProducts , addToCart , destroyTask , addTask , editTask};
 

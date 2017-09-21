@@ -2,13 +2,20 @@ import React  from 'react';
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
 import store from '../store';
-import { destroyTask , addTask } from '../actionCreators';
+import { destroyTask , addTask ,editTask } from '../actionCreators';
+import algo from './Update'
+//import TodoList from './TodoList'
 
 
-const TaskList = ({products, destroyTask, addTask }) => {
+
+  
+const TaskList = ({products, destroyTask, addTask,editTask }) => {  
+
     return(
       <div>
-      <a 
+      <algo/>
+      hola
+      <button 
       className='add-todo' 
       href="#" 
       onClick={(e) =>{ 
@@ -17,18 +24,19 @@ const TaskList = ({products, destroyTask, addTask }) => {
         addTask(todo) 
       }} 
     >
-        hola
-    </a>
+    ADD
+    </button>
         <br/>
         <center>
           <table>
             { products.map(product => 
               <tr key={product.id}>
+
                 <th>
                   <h3> {product.titulo} </h3>
                 </th>
                 <th>
-                  <h3>{product.descripcion}</h3>
+                  <Button  bsStyle="danger" onClick={() => editTask(product.id)} >Cambiar</Button>
                 </th>
                 <th>
                   <Button  bsStyle="danger" onClick={() => destroyTask(product.id)}>Eliminar</Button>
@@ -41,11 +49,13 @@ const TaskList = ({products, destroyTask, addTask }) => {
       </div>
 );  
 };
+
 const mapStateToProps = state => {
   return {
     products: state.products
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     destroyTask(products) {
@@ -53,6 +63,9 @@ const mapDispatchToProps = dispatch => {
     },
     addTask(todo){
       dispatch(addTask(todo));
+    },
+    editTask(todo){
+      dispatch(editTask(todo));
     }
 
   };
