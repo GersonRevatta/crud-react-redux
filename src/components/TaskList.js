@@ -1,19 +1,17 @@
-import React  from 'react';
+import React , { Component } from 'react';
+import classNames from 'classnames'
 import { connect } from 'react-redux';
 import { Button, Glyphicon } from 'react-bootstrap';
 import store from '../store';
 import { destroyTask , addTask ,editTask } from '../actionCreators';
-import algo from './Update'
-//import TodoList from './TodoList'
 
 
 
-  
 const TaskList = ({products, destroyTask, addTask,editTask }) => {  
 
     return(
       <div>
-      <algo/>
+      
       hola
       <button 
       className='add-todo' 
@@ -24,14 +22,13 @@ const TaskList = ({products, destroyTask, addTask,editTask }) => {
         addTask(todo) 
       }} 
     >
-    ADD
+    ADD 
     </button>
         <br/>
         <center>
           <table>
             { products.map(product => 
-              <tr key={product.id}>
-
+              <tr>
                 <th>
                   <h3> {product.titulo} </h3>
                 </th>
@@ -42,6 +39,7 @@ const TaskList = ({products, destroyTask, addTask,editTask }) => {
                   <Button  bsStyle="danger" onClick={() => destroyTask(product.id)}>Eliminar</Button>
                 </th>
               </tr>
+              
             )}  
             
           </table>

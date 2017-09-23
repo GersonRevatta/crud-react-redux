@@ -10,9 +10,7 @@ const loadProducts = () => {
   };
 };
 
-const addToCart = (product) => {
-  return { type: "ADD_TO_CART", product };
-};
+
 
 const destroyTask = (product) => {
   const response = axios.delete(`${baseUrl}/${product}`)
@@ -27,7 +25,6 @@ const addTask = (todo) => {
     }); 
   }
 }
-
 
 const editTask = (todo) => {
   return dispatch=>{
@@ -48,5 +45,5 @@ const editTask = (todo) => {
 
 // { "titulo":"hola worl :D","descripcion":"hi world","prioridad":3,"activo":true} 
 
-export { loadProducts , addToCart , destroyTask , addTask , editTask};
+export { loadProducts  , destroyTask , addTask , editTask};
 
