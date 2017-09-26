@@ -1,46 +1,25 @@
-import React  from 'react';
-import { connect } from 'react-redux';
-import { Button, Glyphicon } from 'react-bootstrap';
-import store from '../store';
-import { destroyTask } from '../actionCreators';
+import React, { Component } from 'react' 
+import Item from './Item'
 
-
-const TaskList = ({products, destroyTask}) => {
-    return(
-      <div>
-        <Button>Add</Button>  
-        <br/>
-        <center>
-          <table>
-            { products.map(product => 
-              <tr key={product.id}>
-                <th>
-                  <h3> {product.titulo} </h3>
-                </th>
-                <th>
-                  <h3>{product.descripcion}</h3>
-                </th>
-                <th>
-                  <Button  bsStyle="danger" onClick={() => destroyTask(product.id)}>Eliminar</Button>
-                </th>
-              </tr>
-            )}  
-            
-          </table>
-        </center>
-      </div>
-);  
-};
-const mapStateToProps = state => {
-  return {
-    products: state.products
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    destroyTask(products) {
-      dispatch(destroyTask(products));
+class TaskList extends Component {
+  componentDidMount(){
+    this.props.fetchTodos()
+  }
+  render(){
+    const { todos, ...rest } = this.props
+    if(this.props.todos.length == 0){
+      return <div>Loading...</div>
     }
-  };
+    return ( 
+      <div className="Todo-List">
+        <ul>
+          {this.props.todos.map(todo => 
+            <Item key={todo.id}  {...todo} {...rest} /> 
+          )} 
+        </ul>
+      </div>   
+    )
+  }
 } 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
+
+export default TaskList
