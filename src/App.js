@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import TaskList from  './components/TaskList';
+import TodoView from  './components/TodoView';
 
 class App extends Component {
   render() {
@@ -15,7 +15,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <br/>
-        <TaskList/>
+        <TodoView/>
       </div>
     );
   }
